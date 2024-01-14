@@ -251,7 +251,6 @@ update_status ModulePlayer::Update(float dt)
 	else {
 		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
 			victory = false;
-			App->scene_intro->UnloadObstacles();
 			App->scene_intro->obstacles = false;
 			App->scene_intro->laps = 0;
 			actual_checkpoint = CheckPoint::First_CP;

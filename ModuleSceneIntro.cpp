@@ -193,9 +193,10 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 				}
 			}
 			else {
-				laps++;
 				if (!App->player->victory) {
+					laps++;
 					App->audio->PlayFx(victorysfx);
+					UnloadObstacles();
 				}
 				App->player->victory = true;
 				App->player->vehicle->vehicle->getRigidBody()->setLinearVelocity(btVector3(0, 0, 0));
@@ -307,6 +308,14 @@ void ModuleSceneIntro::UnloadObstacles() {
 		delete obstacleItem->data;
 		obstacleItem = obstacleItem->next;
 	}
+	App->physics->DelBody(body_physbody);
+	App->physics->DelBody(body2_physbody);
+	App->physics->DelBody(body3_physbody);
+	App->physics->DelBody(body4_physbody);
+	App->physics->DelBody(anchor_physbody);
+	App->physics->DelBody(anchor2_physbody);
+	App->physics->DelBody(anchor3_physbody);
+	App->physics->DelBody(anchor4_physbody);
 	obstacleList.clear();
 
 }

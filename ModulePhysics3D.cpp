@@ -232,6 +232,23 @@ PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass)
 	return pbody;
 }
 
+void ModulePhysics3D::DelBody(PhysBody3D* pbody)
+{
+	if (!pbody)
+		return;
+
+	btRigidBody* body = pbody->body;
+	world->removeRigidBody(body);
+
+	bodies.del(bodies.findNode(pbody));
+
+	btCollisionShape* collisionShape = body->getCollisionShape();
+	shapes.del(shapes.findNode(collisionShape));
+	delete collisionShape;
+
+	delete pbody;
+}
+
 
 // ---------------------------------------------------------
 PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
